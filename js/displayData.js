@@ -8,13 +8,14 @@
 
 let gridBike = document.querySelector('.grid.bike')
 let gridMotorbike = document.querySelector('.grid.motorbike')
-let bikes_keyword  = 'bikes'
-let motorbikes_keyword  = 'motorbikes'
 
-function displayProducts(resource,type) {
+
+function displayCards(state) {
+    let {data,type} = state
     let output = '';
-    for (let i = 0; i < resource.length; i++) {
-        const card= resource[i];
+    for (let i = 0; i < data.length; i++) {
+    // for (let i = 0; i < chunkData.length; i++) {
+        const card = data[i]; //chunkData[i]; //data[i];
         output += `
             <div class="card">
                 <div class="card_img_container">
@@ -32,29 +33,41 @@ function displayProducts(resource,type) {
                 </div>
             </div>`;
     }
-    if(type === 'bikes'){
-        gridBike.innerHTML = output;
-    }
-    else{
-        gridMotorbike.innerHTML = output;
-    }
+    return output
 }
 
-async function getProducts(type) {
+function mainFunc(b_state,mb_state) {   
+    gridBike.innerHTML = displayCards(b_state);
+    gridMotorbike.innerHTML = displayCards(mb_state);
+}
+
+async function getProducts() {
    try {
-       let res = await fetch(`http://localhost:8000/${type}`)
-       if(!res.ok){
-            // https://stackoverflow.com/questions/33355033/try-catch-not-catching-async-await-errors
-            throw new Error(res.statusText);
+       let b_res = await fetch('http://localhost:8000/bikes')
+       let mb_res = await fetch('http://localhost:8000/motorbikes')
+       if(!b_res.ok || !mb_res){
+            throw new Error('Error has occurred');
         }
         else{
-            let data = await res.json()
-            displayProducts(data, type)
+            let b_data = await b_res.json()
+            let mb_data = await mb_res.json()
+            let b_state = {
+                data: b_data,
+                page: 1,
+                cards:2,
+                type: 'bikes'
+            }
+            let mb_state = {
+                data: mb_data,
+                page: 1,
+                cards:2,
+                type: 'motorbikes'
+            }
+            mainFunc(b_state,mb_state)
         }
-   } catch (error) {
+   } catch (err) {
     console.log(err,err.message)
    } 
 }
 
-getProducts(bikes_keyword)
-getProducts(motorbikes_keyword)
+getProducts()

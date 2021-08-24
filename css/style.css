@@ -274,7 +274,7 @@ main {
   display: inline-block;
   text-decoration: none;
   color: #fff;
-  background-color: #3b4351;
+  background-color: #333;
   font-family: "Open Sans", sans-serif;
 }
 
@@ -410,7 +410,20 @@ main {
 }
 
 .card_img.card_detail {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+
+.pagination-wrapper {
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.pagination-wrapper .btn.page {
+  display: inline-block;
+  color: #fff;
+  background-color: #333;
+  font-family: "Open Sans", sans-serif;
+  border: none;
 }
 /*# sourceMappingURL=style.css.map */

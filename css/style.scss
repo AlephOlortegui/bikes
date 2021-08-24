@@ -10,6 +10,7 @@ $white-clr: #fff;
 $danger-clr: #fb6c6d;
 $light-grey: #cdcdcd;
 $grey-clr: #bcc1c4;
+$dark-grey: #333;
 
 *,
 *::after,
@@ -81,3 +82,4 @@ body{
 @import './partials/cartItem';
 @import './partials/cartFoot';
 @import './partials/details';
+@import './partials/pagination';
