@@ -1,0 +1,10 @@
+npm init -y
+npm install json-server
+
+// javascript for index.html
+// https://www.npmjs.com/package/json-server
+// en el terminal
+//json server
+// terminal: npm i json-server
+// json-server --watch data/db.json --port 8000
+//si no se coloca el port por defecto va a ser 3000
