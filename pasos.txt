@@ -8,3 +8,19 @@ npm install json-server
 // terminal: npm i json-server
 // json-server --watch data/db.json --port 8000
 //si no se coloca el port por defecto va a ser 3000
+
+
+*!!
+Todo bien estas en el commit donde aparentemente esta bien con el detalle de cart.js
+que solo percibe 4 botones es or eso que el resto no se agrega al carrito
+todo esto debido a agregar paginación a displayData.js
+peor que details.js el boton de agregar al carrito no hace nada
+
+seria hacer el post method pero cambiarias drasticamente el cart.js crear
+un nuevo "resource" lamado "carito" con los items agregados y en el mismo cart,jsaplicar fetch
+con json server y en details.js al hacer post , se agregará al shop.html 
+
+
+asi que merge o une cart.js y displayData en 1 solo archivo por ejemplo main.js
+pero agregando el metodo post a cada boton de "add_to_cart" y darle fetch con la parte 
+que es cart.js

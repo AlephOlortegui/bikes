@@ -9,7 +9,7 @@
 let gridBike = document.querySelector('.grid.bike')
 let gridMotorbike = document.querySelector('.grid.motorbike')
 
-function displayCards(chunkedData) {
+function displayCards(chunkedData,type) {
     let output = '';
     for (let i = 0; i < chunkedData.length; i++) {
         const card = chunkedData[i];
@@ -26,7 +26,7 @@ function displayCards(chunkedData) {
                     </div>
                 </div>
                 <div class="card_details_link">
-                    <a class="btn details_btn" href="details.html?id=${card.id}&name=${card.name}" role="button">Read more</a>
+                    <a class="btn details_btn" href="details.html?id=${card.id}&name=${card.name}&type=${type}" role="button">Read more</a>
                 </div>
             </div>`;
     }
@@ -46,8 +46,6 @@ function pagination(data, page, cards) {
     }
 }
 
-
-
 function mainFunc(b_state,mb_state) {   
     showEach()
     function showEach(){
@@ -55,58 +53,80 @@ function mainFunc(b_state,mb_state) {
         let b_pag = pagination(b_state.data,b_state.page,b_state.cards)
         let mb_pag = pagination(mb_state.data,mb_state.page,mb_state.cards)
 
-        gridBike.innerHTML = displayCards(b_pag.chunkedData);
-        gridMotorbike.innerHTML = displayCards(mb_pag.chunkedData);
+        gridBike.innerHTML = displayCards(b_pag.chunkedData, b_state.type);
+        gridMotorbike.innerHTML = displayCards(mb_pag.chunkedData, mb_state.type);
 
         let wrappers = document.querySelectorAll('.pagination-wrapper');
 
-        wrappers.forEach(wrapper => {
-            let btns = wrapper.querySelectorAll('.btn.page')
-            btns.forEach((btn,idx) => {
-                btn.addEventListener('click', () =>{
-                    if(btn.dataset.father === 'bike'){
-                        console.log('click bike',idx)
-                        // pageBtns(b_pag.pages, b_state, idx, btns)
+        wrappers.forEach((wrapper,idx) => {
+            wrapper.innerHTML = '';
+
+            if(idx === 0){
+                wrappers[0].innerHTML = `<button class="btn page" data-type="bike"><i class="fas fa-backward"></i></button>
+                <button class="btn page" data-type="bike"><i class="fas fa-forward"></i></button>`;
+            }
+            else{
+                wrappers[1].innerHTML = `<button class="btn page" data-type="motorbike"><i class="fas fa-backward"></i></button>
+                <button class="btn page" data-type="motorbike"><i class="fas fa-forward"></i></button>`;
+            }
+
+            let btns = wrapper.querySelectorAll('.page')
+
+            btns.forEach((btn,i) => {
+                btn.addEventListener('click', ()=>{
+                    if(btn.dataset.type === 'bike'){
+                        let y = b_state.page
+                        if(i === 0){
+                            y = y - 1
+                            if(y < 1){
+                                b_state.page = 1
+                                btn.disabled = true
+                            }
+                            else{
+                                b_state.page = y
+                                showEach()
+                            }
+                        }
+                        else{
+                            y = y + 1
+                            if(y > b_pag.pages){
+                                b_state.page = b_pag.pages
+                                btn.disabled = true
+                            }
+                            else{
+                                b_state.page = y
+                                showEach()
+                            }
+                        }
                     }
-                    else if(btn.dataset.father === 'motorbike'){
-                        console.log('click motorbike',idx)
-                        // pageBtns(mb_pag.pages, mb_state, idx, btns)
+                    else if(btn.dataset.type === 'motorbike'){
+                        let y = mb_state.page
+                        if(i === 0){
+                            y = y - 1
+                            if(y < 1){
+                                mb_state.page = 1
+                                btn.disabled = true
+                            }
+                            else{
+                                mb_state.page = y
+                                showEach()
+                            }
+                        }
+                        else{
+                            y = y + 1
+                            if(y > mb_pag.pages){
+                                mb_state.page = mb_pag.pages
+                                btn.disabled = true
+                            }
+                            else{
+                                mb_state.page = y
+                                showEach()
+                            }
+                        } 
                     }
                 })
-                
             })
         })
-    }
-
-    function pageBtns(pages, state,idx,btns) {
-        console.log(state)
-/*         let y = state.page
-        y = y + 1
-        state.page = y 
-        console.log(pages, state) */
-
-        // if(idx === 0){
-        //     y = y - 1
-        //     if(y < 1){
-        //         state.page = 1
-        //     }
-        //     else{
-        //         state.page = y
-        //         console.log(pages, state)
-        //         showEach()
-        //     }
-        // }
-        // else if(idx === 1){
-        //     y = y + 1
-        //     if(y > pages){
-        //         state.page = pages
-        //     }
-        //     else{
-        //         state.page = y 
-        //         console.log(pages, state)
-        //         showEach()
-        //     }
-        // }
     }
 }
 

@@ -81,6 +81,7 @@ function getInfo() {
 
 function ready() {
     let addBtns = document.querySelectorAll('.btn.add_to_cart')
+    console.log(addBtns) //cuando agrego la paginacion solo chapa 4 botones x eso el resto no se agrega
     addBtns.forEach(addBtn => {
         addBtn.addEventListener('click', getInfo)
     })
