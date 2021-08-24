@@ -19,6 +19,7 @@ body {
   max-width: 768px;
   margin: 2em auto;
   padding: 0 1rem;
+  max-height: 450px;
 }
 
 .section-title {
@@ -36,6 +37,10 @@ body {
   cursor: pointer;
   -webkit-transition: background-color .2s ease-in, color .2s ease-in;
   transition: background-color .2s ease-in, color .2s ease-in;
+}
+
+.btn:disabled {
+  opacity: .3;
 }
 
 .btn.add_to_cart {
@@ -264,7 +269,7 @@ main {
 
 .card_details_link {
   position: absolute;
-  right: -30%;
+  right: -100%;
   bottom: 14%;
   -webkit-transition: right .3s ease-in;
   transition: right .3s ease-in;
@@ -291,6 +296,12 @@ main {
   }
   .card_body_title {
     margin-bottom: .5rem;
+  }
+  .card_details_link {
+    bottom: 70px;
+  }
+  .card_details_link a.details_btn {
+    font-size: 12px;
   }
 }
 
@@ -396,6 +407,10 @@ main {
 
 .cart_foot_details h1 {
   margin: 0 1rem;
+}
+
+.content.details {
+  max-height: auto;
 }
 
 .navbar_link a {

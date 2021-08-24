@@ -48,7 +48,7 @@
 
     &_details_link{
         position: absolute;
-        right: -30%;
+        right: -100%;
         bottom: 14%;
         transition: right .3s ease-in;
 
@@ -71,5 +71,13 @@
     }
     .card_body_title{
       margin-bottom: .5rem;
+    }
+    .card_details_link{
+
+        bottom: 70px;
+        
+        a.details_btn{
+            font-size: 12px;
+        }
     }
   }
